@@ -1,0 +1,3 @@
+User-agent: *
+Sitemap: https://matrix.akashrajpurohit.cf/sitemap.xml
+Allow: /
