@@ -10,7 +10,7 @@ function setup() {
 	symbol = new Symbol(
 		width / 2,
 		0,
-		random(5, 15)
+		random(4, 10)
 	)
 
 	// Generate that random symbol
@@ -32,12 +32,16 @@ function Symbol(x, y, speed) {
 	this.y = y
 	this.speed = speed
 	this.value
+	this.switchInterval = round(random(2, 20))
 
 	// Set the random symbol - The symbols used in the matrix movie screen is Katakana
 	this.setToRandomSymbol = function() {
-		this.value = String.fromCharCode(
-			0x30A0 + round(random(0, 96)) // 96 symbols in Katakana
-		)
+		// Conditionally change the interval of switching the symbols
+		if(frameCount % this.switchInterval == 0) {
+			this.value = String.fromCharCode(
+				0x30A0 + round(random(0, 96)) // 96 symbols in Katakana
+			)
+		}
 	}
 
 	// Render the symbol on screen
@@ -45,6 +49,7 @@ function Symbol(x, y, speed) {
 		fill(0 ,255, 80)
 		text(this.value, this.x, this.y)
 		this.rain()
+		this.setToRandomSymbol()
 	}
 
 	// Raining symbol
