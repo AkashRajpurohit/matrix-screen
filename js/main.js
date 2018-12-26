@@ -9,7 +9,8 @@ function setup() {
  	// Initialize Symbol
 	symbol = new Symbol(
 		width / 2,
-		height / 2
+		0,
+		random(5, 15)
 	)
 
 	// Generate that random symbol
@@ -20,14 +21,17 @@ function setup() {
 
 // get called repeatedly at 60FPS
 function draw() {
+	// Redraw the background color
+	background(17, 17, 17)
 	// Draw the random symbol
 	symbol.renderSymbol();
 }
 
-function Symbol(x, y) {
+function Symbol(x, y, speed) {
 	this.x = x
 	this.y = y
-	this.value;
+	this.speed = speed
+	this.value
 
 	// Set the random symbol - The symbols used in the matrix movie screen is Katakana
 	this.setToRandomSymbol = function() {
@@ -40,5 +44,12 @@ function Symbol(x, y) {
 	this.renderSymbol = function() {
 		fill(0 ,255, 80)
 		text(this.value, this.x, this.y)
+		this.rain()
+	}
+
+	// Raining symbol
+	this.rain = function() {
+		// Reset the y for continous rain
+		(this.y >= height) ? this.y = 0 : this.y += this.speed
 	}
 }
