@@ -54,6 +54,11 @@ function Symbol(x, y, speed, first) {
 		}
 	}
 
+	// Limit the speed a little when on small devices to enjoy the matrix animation
+	if(window.innerWidth < 576) {
+		this.speed -= 5
+	}
+
 	// Raining symbol
 	this.rain = function() {
 		// Reset the y for continous rain
