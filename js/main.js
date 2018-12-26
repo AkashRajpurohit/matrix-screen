@@ -1,5 +1,5 @@
-let symbolSize = 30;
-let stream;
+let symbolSize = 25;
+let streams = [];
 
 // Invoked once
 function setup() {
@@ -9,19 +9,32 @@ function setup() {
 	// Set symbol size
 	textSize(symbolSize);
 
-	// Create stream
-	stream = new Stream()
+	// Initial position for stream
+	let x = 0
+	let y = 0
 
-	// Generate the symbols
-	stream.generateSymbols()
+	// Loop and generate array of different streams
+	for (let i = 0; i <= width/ symbolSize; i++) {
+		// initialize stream
+		stream = new Stream()
+		// generate new stream
+		stream.generateSymbols(x, y)
+		// push this new stream to major streams array - Global declaration
+		streams.push(stream)
+		// increment x position with symbolSize for alignment
+		x += symbolSize + round(random(10,20))
+	}
 }
 
 // get called repeatedly at 60FPS
 function draw() {
 	// Redraw the background color
 	background(17, 17, 17)
-	// Draw the random symbol
-	stream.render();
+	
+	// loop through the streams array and render all streams
+	streams.forEach(function(stream) {
+		stream.render();
+	})
 }
 
 function Symbol(x, y, speed) {
@@ -54,10 +67,7 @@ function Stream() {
 	this.speed = round(random(5, 15))
 
 	// Generate array of symbols which will be part of a stream
-	this.generateSymbols = function() {
-		let y = 0
-		let x = width / 2
-
+	this.generateSymbols = function(x, y) {
 		for(let i = 0; i <= this.totalSymbols; i++) {
 			// create new symbol
 			symbol = new Symbol(x, y, this.speed)
