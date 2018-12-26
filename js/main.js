@@ -11,14 +11,13 @@ function setup() {
 
 	// Initial position for stream
 	let x = 0
-	let y = 0
 
 	// Loop and generate array of different streams
 	for (let i = 0; i <= width/ symbolSize; i++) {
 		// initialize stream
 		stream = new Stream()
 		// generate new stream
-		stream.generateSymbols(x, y)
+		stream.generateSymbols(x, random(-1000, 0))
 		// push this new stream to major streams array - Global declaration
 		streams.push(stream)
 		// increment x position with symbolSize for alignment
