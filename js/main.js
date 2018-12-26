@@ -68,8 +68,9 @@ function Stream() {
 
 	// Generate array of symbols which will be part of a stream
 	this.generateSymbols = function(x, y) {
-		// initially first will be true
-		let first = true
+		// 25% chance of the first symbol to be of different color
+		let first = round(random(0 , 3)) === 1
+
 		for(let i = 0; i <= this.totalSymbols; i++) {
 			// create new symbol
 			symbol = new Symbol(x, y, this.speed, first)
