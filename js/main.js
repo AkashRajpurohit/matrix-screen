@@ -7,7 +7,7 @@ function setup() {
 	background(17, 17, 17)
 
 	// Set symbol size
-	textSize(symbolSize);
+	textSize(symbolSize)
 
 	// Initial position for stream
 	let x = 0
@@ -28,20 +28,21 @@ function setup() {
 // get called repeatedly at 60FPS
 function draw() {
 	// Redraw the background color
-	background(17, 17, 17)
+	background(17, 17, 17, 150)
 	
 	// loop through the streams array and render all streams
 	streams.forEach(function(stream) {
-		stream.render();
+		stream.render()
 	})
 }
 
-function Symbol(x, y, speed) {
+function Symbol(x, y, speed, first) {
 	this.x = x
 	this.y = y
 	this.speed = speed
 	this.value
 	this.switchInterval = round(random(2, 20))
+	this.first = first
 
 	// Set the random symbol - The symbols used in the matrix movie screen is Katakana
 	this.setToRandomSymbol = function() {
@@ -67,22 +68,27 @@ function Stream() {
 
 	// Generate array of symbols which will be part of a stream
 	this.generateSymbols = function(x, y) {
+		// initially first will be true
+		let first = true
 		for(let i = 0; i <= this.totalSymbols; i++) {
 			// create new symbol
-			symbol = new Symbol(x, y, this.speed)
+			symbol = new Symbol(x, y, this.speed, first)
 			// set to random symbol
 			symbol.setToRandomSymbol()
 			// push to streams array
 			this.symbols.push(symbol)
 			// decrement the y by symbol size to ensure next symbol is generated just above the previous one
 			y -= symbolSize
+			// set first to false
+			first = false
 		}
 	}
 
 	// Display the stream
 	this.render = function () {
 		this.symbols.forEach(function(symbol) {
-			fill(0 ,255, 80)
+			// conditionally fill the color of first and rest of other symbols
+			(symbol.first) ? fill(150 ,255, 180) : fill(0 ,255, 80)
 			text(symbol.value, symbol.x, symbol.y)
 			symbol.rain()
 			symbol.setToRandomSymbol()
