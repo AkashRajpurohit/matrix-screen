@@ -2,7 +2,7 @@
 Simple matrix raining symbols screen using p5.js.
 
 # Preview
-check the preview at https://matrix.akashrajpurohit.cf
+check the preview at https://matrixrain.netlify.com/
 
 ## Things I learnt while developing this project
 1. Basics of [p5.js](https://p5js.org/) library
@@ -12,4 +12,4 @@ check the preview at https://matrix.akashrajpurohit.cf
 and many more...
 
 ## Visit my portfolio -
-[Akash Rajpurohit](https://akashrajpurohit.cf/)
+[Akash Rajpurohit](https://akashwho.codes/)
